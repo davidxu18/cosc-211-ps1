@@ -44,7 +44,7 @@ public class LinkedSimpleList<E> implements SimpleList<E> {
     private Node<E> getNode(int i) {
 	// check if i is a valid index
 	if (i < 0 || i >= size) return null;
-	
+
 	Node<E> cur = head;
 
 	// find the i-th successor of the head
@@ -52,29 +52,29 @@ public class LinkedSimpleList<E> implements SimpleList<E> {
 	    cur = cur.next;
 	}
 
-	return cur;	
+	return cur;
     }
 
     @Override
     public E get(int i) {
-	
+
 	// check if the index is in bounds
 	if (i < 0 || i >= size) {
 	    throw new IndexOutOfBoundsException();
 	}
-	
+
 	return getNode(i).value;
     }
 
     @Override
     public void set(int i, E x) {
-	
-	// check if the index is in bounds	
+
+	// check if the index is in bounds
 	if (i < 0 || i >= size) {
-	    throw new IndexOutOfBoundsException();	    
+	    throw new IndexOutOfBoundsException();
 	}
 
-	
+
 	Node<E> nd = getNode(i);
 	nd.value = x;
     }
@@ -82,7 +82,7 @@ public class LinkedSimpleList<E> implements SimpleList<E> {
     @Override
     public void add(int i, E x) {
 	if (i < 0 || i > size) {
-	    throw new IndexOutOfBoundsException();	    
+	    throw new IndexOutOfBoundsException();
 	}
 
 	// make a new Node to store x
@@ -94,7 +94,7 @@ public class LinkedSimpleList<E> implements SimpleList<E> {
 	    // stored at the head
 	    nd.next = this.head;
 	    this.head = nd;
-	    
+
 	} else {
 	    // insert the node storing x between the node at index i-1
 	    // and the node previously at index i
@@ -102,7 +102,7 @@ public class LinkedSimpleList<E> implements SimpleList<E> {
 	    Node<E> succ = pred.next;
 	    pred.next = nd;
 	    nd.next = succ;
-	    
+
 	}
 
 	++size;
@@ -111,7 +111,7 @@ public class LinkedSimpleList<E> implements SimpleList<E> {
     public E remove(int i) {
 	// check if the index is valid
 	if (i < 0 || i >= size) {
-	    throw new IndexOutOfBoundsException();	    
+	    throw new IndexOutOfBoundsException();
 	}
 
 	if (i == 0) {
@@ -129,10 +129,10 @@ public class LinkedSimpleList<E> implements SimpleList<E> {
 	pred.next = pred.next.next;
 
 	--size;
-	
+
 	return value;
     }
-	
+
 
     /**
      * An inner class representing a node in the linked list. Each

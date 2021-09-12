@@ -8,7 +8,7 @@ import java.io.*;
 
 public class CSVWriter {
     /**
-     * The path to the CSV file being written. 
+     * The path to the CSV file being written.
      */
     private String path;
 
@@ -53,7 +53,7 @@ public class CSVWriter {
 	}
 	curLine.append(str);
     }
-    
+
     /**
      * <p>Append an <code>int</code> entry to the current row/line
      * of the CSV file.</p>
@@ -93,7 +93,7 @@ public class CSVWriter {
     public void addEntry(double value) {
 	addEntry(Double.toString(value));
     }
-    
+
     /**
      * <p>End the current line (row) of the CSV file, and write its
      * contents to the file at path. Subsequent calls to
@@ -104,9 +104,9 @@ public class CSVWriter {
 	try {
 	    out.write(curLine.toString() + "\n");
 	} catch (IOException e) {
-	    
+
 	}
-	
+
 	curLine.setLength(0);
     }
 
@@ -121,7 +121,7 @@ public class CSVWriter {
 	} catch (IOException e) {
 	    System.err.println("could not close file " + path);
 	}
-	
+
 
     }
 }

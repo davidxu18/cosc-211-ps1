@@ -110,7 +110,7 @@ public class CADeque<E> implements SimpleDeque<E> {
     @Override
     @SuppressWarnings("unchecked")
     public E removeLast() {
-      if(size ==0){
+      if(size==0){
         throw new NullPointerException();
       }
       E item = (E) contents[end];

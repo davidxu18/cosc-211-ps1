@@ -28,7 +28,7 @@
  * <code>removeFront</code>, and <code>peekFront</code> are analogous
  * to a <code>SimpleQueue</code>'s <code>add</code>,
  * <code>remove</code>, and <code>peek</code>, respectively.
- * 
+ *
  * @see SimpleQueue
  * @see SimpleStack
  */
@@ -47,7 +47,7 @@ public interface SimpleDeque<E> {
      * contains no elements).
      *
      * @return true if and only if the deque is empty
-     */        
+     */
     boolean isEmpty();
 
     /**
@@ -58,7 +58,7 @@ public interface SimpleDeque<E> {
      * <code>x1 x2 ... xn x</code>.</p>
      *
      * @param x the element to be added to the front of the deque
-     */    
+     */
     void addFirst(E x);
 
     /**
@@ -72,7 +72,7 @@ public interface SimpleDeque<E> {
      *
      * @return the first element in the deque
      * @throws java.util.NoSuchElementException if the deque is empty
-     */    
+     */
     E removeFirst();
 
     /**
@@ -82,7 +82,7 @@ public interface SimpleDeque<E> {
      *
      * @return the front element of the deque, or if empty,
      * <code>null</code>
-     */    
+     */
     E peekFirst();
 
     /**
@@ -92,7 +92,7 @@ public interface SimpleDeque<E> {
      * <code>x x1 x2 ... xn</code>.</p>
      *
      * @param x the element to be added to the back of the deque
-     */        
+     */
     void addLast(E x);
 
     /**
@@ -106,7 +106,7 @@ public interface SimpleDeque<E> {
      *
      * @return the last element in the deque
      * @throws java.util.NoSuchElementException if the deque is empty
-     */        
+     */
     E removeLast();
 
     /**
@@ -116,6 +116,6 @@ public interface SimpleDeque<E> {
      *
      * @return the back element of the deque, or if empty,
      * <code>null</code>
-     */    
+     */
     E peekLast();
 }
