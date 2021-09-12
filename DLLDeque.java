@@ -24,10 +24,6 @@ public class DLLDeque<E> implements SimpleDeque<E> {
 	@SuppressWarnings("unchecked")
 	public void addFirst(E x) {	
 
-		if (size == 0) {
-			throw new IndexOutOfBoundsException();
-		}
-
 		// make a new Node to store x
 		Node<E> nd = new Node<E>();
 		nd.value = x;
@@ -56,6 +52,11 @@ public class DLLDeque<E> implements SimpleDeque<E> {
 
 	@Override
 	public E peekFirst() {
+
+		if (size == 0) {
+			throw new IndexOutOfBoundsException();
+		}
+
 		return head.value;
 	}
 
@@ -63,18 +64,24 @@ public class DLLDeque<E> implements SimpleDeque<E> {
 	@SuppressWarnings("unchecked")
 	public void addLast(E x) {
 
-		if (size == 0) {
-			throw new IndexOutOfBoundsException();
-		}
-
 		// make a new Node to store x
 		Node<E> nd = new Node<E>();
-		nd.value = tail.value;
-		nd.prev = tail.prev;
-		nd.next = tail;
+		if (size == 0) {
+			head = nd;
+			head.value = x;
+			head.next = tail;
+			tail = nd;
+			tail.prev = head;
+			tail.next = null;	
+		}
+		else {
+			nd.value = tail.value;
+			nd.prev = tail.prev;
+			nd.next = tail;
 		
-		tail.prev = nd;
-		tail.value = x;
+			tail.prev = nd;
+			tail.value = x;
+		}
 		++size;
 	}
 
@@ -95,6 +102,11 @@ public class DLLDeque<E> implements SimpleDeque<E> {
 
 	@Override
 	public E peekLast() {
+
+		if (size == 0) {
+			throw new IndexOutOfBoundsException();
+		}
+
 		return tail.value;
 	}
 
