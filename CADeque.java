@@ -1,13 +1,21 @@
 /**
-  want the following operations:
-  - addFirst, removeFirst, peekFirst
-  - addLast, removeLast, peekLast
-  - size
-  - isEmpty
- */
+  This code uses a circular array to implement a simple Deque.
+  The following methods are used:
+    - size() : returns size of deque
+    - isEmpty() : returns true if the deque is empty
+    - addFirst() : adds element to start of Deque
+    - removeFirst() : removes the first element and returns it
+    - peekFirst() : returns the first element
+    - addLast() : adds element to end of Deque
+    - removeLast() : removes the last element and returns it
+    - peekLast() : returns the last element
+    - increaseCapacity() : doubles the capacity of the array.
+ **/
 
 public class CADeque<E> implements SimpleDeque<E> {
+    // This defines the default capacity of the array
     public static final int DEFAULT_CAPACITY = 16;
+    // Stores the current capacity of array
     private int capacity;
     // The size of the deque
     private int size = 0;
@@ -27,17 +35,34 @@ public class CADeque<E> implements SimpleDeque<E> {
       this.capacity = initialCapacity;
       contents = new Object[capacity];
     }
-    // size---------------------------------------------------------------------
+    /** size()------------------------------------------------------------------
+    Returns the size of the deque.
+    ----------------------------------------------------------------------------
+    */
     @Override
     public int size() {
       return this.size;
     }
-    // isEmpty------------------------------------------------------------------
+    /** isEmpty()---------------------------------------------------------------
+    Returns true if the deque is empty and false if the deque is not empty.
+    ----------------------------------------------------------------------------
+    */
     @Override
     public boolean isEmpty() {
       return this.size == 0;
     }
-    // addFirst------------------------------------------------------------------
+    /** addFirst()--------------------------------------------------------------
+    1) checks if there is space to insert an element. If not, calls increase
+    capacity.
+    2) If this is the first call to addFirst (size == 0), then insert the
+    element at index 0.
+    3) If start is at the 0 index, insert the element at the end of the array
+    and shift start to the end of the array.
+    4) If start is not at the 0 index, insert the element before start, and
+    shift start back.
+    5) Increase size
+    ----------------------------------------------------------------------------
+    */
     @Override
     @SuppressWarnings("unchecked")
     public void addFirst(E x){
@@ -57,7 +82,14 @@ public class CADeque<E> implements SimpleDeque<E> {
       }
       ++size;
     }
-    // removeFirst--------------------------------------------------------------
+    /** removeFirst()-----------------------------------------------------------
+    1) Check if the deque is empty, if so return exception.
+    2) Else, store the item at start to return. Then shift start back if not at
+    the end of the deque. If at the end of the deque, move start to the start.
+    3) Decrease the size
+    4) Return the element
+    ----------------------------------------------------------------------------
+    */
     @Override
     @SuppressWarnings("unchecked")
     public E removeFirst() {
@@ -74,7 +106,11 @@ public class CADeque<E> implements SimpleDeque<E> {
       --size;
       return (E) item;
     }
-    // peekFirst--------------------------------------------------------------
+    /** peekFirst()-------------------------------------------------------------
+    1) Check if the deque is empty, if so return an exception
+    2) Return the element at start
+    ----------------------------------------------------------------------------
+    */
     @Override
     @SuppressWarnings("unchecked")
     public E peekFirst() {
@@ -83,16 +119,19 @@ public class CADeque<E> implements SimpleDeque<E> {
       }
       return (E) contents[start];
     }
-    // addLast##################################################################
+    /** addLast()--------------------------------------------------------------
+    1) Check if the array has space. If not increase capacity.
+    2) If the deque is empty, insert the element at index 0.
+    3) If end is at the end of the array, insert at 0 and set end at 0.
+    4) If end is not at the end of the array, insert at end+1 and shift end back.
+    5) Increase size.
+    ----------------------------------------------------------------------------
+    */
     @Override
     public void addLast(E x){
       if( size == capacity) {
         increaseCapacity();
-        // System.out.println("increased capacity to");
-        // System.out.println(capacity);
-        // System.out.println(size);
       }
-      // this is to fix the initial weirdness
       if (size == 0) {
         contents[0] = x;
       }
@@ -106,7 +145,14 @@ public class CADeque<E> implements SimpleDeque<E> {
       }
       ++size;
     }
-    // removeLast###############################################################
+    /** removeLast()------------------------------------------------------------
+    1) If the deque is empty, return an exception.
+    2) Store the element at end, then if end is at 0, shift end to the end of
+    the array. Otherwise, shift end backwards.
+    3) Reduce size.
+    4) Return element.
+    ----------------------------------------------------------------------------
+    */
     @Override
     @SuppressWarnings("unchecked")
     public E removeLast() {
@@ -123,16 +169,25 @@ public class CADeque<E> implements SimpleDeque<E> {
       --size;
       return (E) item;
     }
-    // peekLast#################################################################
+    /** peekLast()--------------------------------------------------------------
+    1) If deque is empty, then return an exception.
+    2) Return element at end.
+    ----------------------------------------------------------------------------
+    */
     @Override
     public E peekLast() {
       if(size ==0){
-        System.out.println("here?");
         throw new NullPointerException();
       }
       return (E) contents[end];
     }
-    // increaseCapacity---------------------------------------------------------
+    /** increaseCapacity()------------------------------------------------------
+    1) Create a new array with twice the capacity.
+    2) Copy all elements from the current deque to the new deque.
+    3) Change contents to point to the new array, set the size to the old
+    capacity, and set the endpoint to capacity, and update the capacity.
+    ----------------------------------------------------------------------------
+    */
     private void increaseCapacity() {
       Object[] bigContents = new Object[2 * capacity];
       for(int i = 0; i < capacity; ++i){
