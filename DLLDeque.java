@@ -2,7 +2,7 @@
  * Deque implemented using a doubly linked list
  */
 
-public class DLLDeque<E> implements SimpleDeque {
+public class DLLDeque<E> implements SimpleDeque<E> {
 
 	private int size = 0;
 
@@ -10,14 +10,18 @@ public class DLLDeque<E> implements SimpleDeque {
 
 	private Node<E> tail = null;
 
+	@Override
 	public int size() {
 		return this.size;
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return head == null;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
 	public void addFirst(E x) {	
 
 		if (size == 0) {
@@ -36,6 +40,7 @@ public class DLLDeque<E> implements SimpleDeque {
 		++size;
     	}
 
+	@Override
 	public E removeFirst() {
 
 		if (size == 0) {
@@ -49,10 +54,13 @@ public class DLLDeque<E> implements SimpleDeque {
 		return value;
 	}
 
+	@Override
 	public E peekFirst() {
 		return head.value;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
 	public void addLast(E x) {
 
 		if (size == 0) {
@@ -70,6 +78,7 @@ public class DLLDeque<E> implements SimpleDeque {
 		++size;
 	}
 
+	@Override
 	public E removeLast() {
 		if (size == 0) {
 			throw new IndexOutOfBoundsException();
@@ -84,6 +93,7 @@ public class DLLDeque<E> implements SimpleDeque {
 		return value;
 	}	
 
+	@Override
 	public E peekLast() {
 		return tail.value;
 	}
